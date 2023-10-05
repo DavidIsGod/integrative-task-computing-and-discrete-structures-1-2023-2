@@ -1,5 +1,7 @@
 package ui;
 
+import java.util.Calendar;
+
 import java.util.Scanner;
 
 import model.ControllerDodge;
@@ -10,13 +12,11 @@ public class Dodge {
     private ControllerDodge dodge;
 
     public Dodge() {
-
         sc = new Scanner(System.in);
         dodge = new ControllerDodge();
     }
 
     public static void main(String[] args) {
-
         Dodge exe = new Dodge();
         exe.menu();
     }
@@ -25,7 +25,6 @@ public class Dodge {
         System.out.println("/----------Always_Note----------/");
         boolean flag = false;
         while (!flag) {
-
             System.out.println("1.\tAdd a new task.\r\n" +
                     "2.\tModify an existing task.\r\n" +
                     "3.\tDelete a task.\r\n" +
@@ -61,15 +60,18 @@ public class Dodge {
                 default:
                     break;
             }
-
         }
     }
 
     private void addTask() {
-        System.out.println("Para agregar una Tarea debes proporcionar la siguiente información: \nEnter the ID:");
+        System.out.println("Para agregar una Tarea debes proporcionar la siguiente información:");
+        System.out.println("Enter the ID:");
         int id = sc.nextInt();
-        System.out.println("Choose the priority: 1. Pirority or 2. Non-Priority");
-        int priority = sc.nextInt();
+        sc.nextLine();
+        System.out.println("Enter the Title:");
+        String title = sc.nextLine();
+        System.out.println("Enter the information:");
+        String summary = sc.nextLine();
         System.out.println("Enter the limit date");
         System.out.println("Enter the day");
         int day = sc.nextInt();
@@ -77,15 +79,13 @@ public class Dodge {
         int month = sc.nextInt();
         System.out.println("Enter the year");
         int year = sc.nextInt();
-        sc.nextInt();
-
         sc.nextLine();
-        System.out.println("Enter de Title");
-        String title = sc.nextLine();
-        System.out.println("Enter the information:");
-        String summary = sc.nextLine();
+        System.out.println("Choose the priority: 1. Priority or 2. Non-Priority");
+        int priority = sc.nextInt();
 
-        if (dodge.addTask(id, summary, dodge.creatCalendar(day, month, year), priority, title)) {
+        Calendar deadline = dodge.creatCalendar(day, month, year);
+
+        if (dodge.addTask(id, title, summary, deadline, priority)) {
             System.out.println("Task added successfully");
         } else {
             System.out.println("No se pudo agregar la tarea");
@@ -93,18 +93,22 @@ public class Dodge {
     }
 
     private void modifyTask() {
+        // Implementa la lógica para modificar una tarea
     }
 
     private void deleteTask() {
+        // Implementa la lógica para eliminar una tarea
     }
 
     private void showAllTask() {
+        // Implementa la lógica para mostrar todas las tareas
     }
 
     private void showTaskforPriority() {
+        // Implementa la lógica para mostrar tareas por prioridad
     }
 
     private void undoLastAction() {
+        // Implementa la lógica para deshacer la última acción
     }
-
 }
