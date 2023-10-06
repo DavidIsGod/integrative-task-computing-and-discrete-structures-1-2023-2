@@ -43,8 +43,18 @@ public class TaskHashTable {
         }
     }
 
+
     // Función de hash simple
     private int hashFunction(int id) {
         return id % TABLE_SIZE;
     }
+
+    public void print() {
+        for (int i = 0; i < TABLE_SIZE; i++) {
+            System.out.println("Lista " + i + ":");
+            table[i].print();
+        }
+    }
+
+
 }
