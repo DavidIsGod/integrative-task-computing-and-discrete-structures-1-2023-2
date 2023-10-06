@@ -66,4 +66,6 @@ class MiListaEnlazada<T> {
         return tamaño;
     }
 
+    public void print() {
+    }
 }
