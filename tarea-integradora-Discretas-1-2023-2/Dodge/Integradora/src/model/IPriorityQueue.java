@@ -11,4 +11,14 @@ public interface IPriorityQueue<T> {
     int getSize();
 
     boolean isEmpty();
+
+    void heapify(int index);
+
+    boolean enqueue(T value);
+
+    boolean dequeue();
+
+    T peek();
+
+
 }
