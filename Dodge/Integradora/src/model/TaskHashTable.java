@@ -1,59 +1,69 @@
 package model;
 
-public class TaskHashTable {
-    private static final int TABLE_SIZE = 100; // Tamaño de la tabla (puedes ajustarlo según tus necesidades)
-    private MiListaEnlazada<Task>[] table;
+public class TaskHashTable <K,V> implements IHashTable<K,V> {
 
-    @SuppressWarnings("unchecked")
-    public TaskHashTable() {
-        table = new MiListaEnlazada[TABLE_SIZE];
-        for (int i = 0; i < TABLE_SIZE; i++) {
-            table[i] = new MiListaEnlazada<>();
+    private HashNode<K,V>[] table;
+    private int size;
+
+    public TaskHashTable(int size) {
+        this.size = size;
+        this.table = new HashNode[size];
+    }
+
+    public int hash(K key) {
+        return key.hashCode() % size;
+    }
+
+    @Override
+    public void insert(K key, V value) {
+        int index = hash(key);
+        HashNode<K,V> nodeToAdd = new HashNode<K,V>(key, value);
+        if (table[index] == null) {
+            table[index] = nodeToAdd;
+        } else {
+            nodeToAdd.setNext(table[index]);
+            table[index] = nodeToAdd;
         }
     }
 
-    public void addTask(int id, Task task) {
-        int index = hashFunction(id);
-        table[index].agregar(task);
+    @Override
+    public V search(K key) {
+        int index = hash(key);
+        return search(table[index], key);
     }
 
-    public Task getTask(int id) {
-        int index = hashFunction(id);
-        MiListaEnlazada<Task> lista = table[index];
-        Nodo<Task> actual = lista.getCabeza();
-        while (actual != null) {
-            if (actual.valor.getId() == id) {
-                return actual.valor;
-            }
-            actual = actual.siguiente;
+    private V search(HashNode<K,V> node, K key){
+        if (node == null) {
+            return null;
         }
-        return null; // No se encontró la tarea con el ID especificado
+        if (node.getKey().equals(key)) {
+            return node.getValue();
+        }
+        return search(node.getNext(), key);
     }
 
-    public void removeTask(int id) {
-        int index = hashFunction(id);
-        MiListaEnlazada<Task> lista = table[index];
-        Nodo<Task> actual = lista.getCabeza();
-        while (actual != null) {
-            if (actual.valor.getId() == id) {
-                lista.eliminar(actual.valor);
-                return;
-            }
-            actual = actual.siguiente;
+    @Override
+    public void delete(K key) {
+        int index = hash(key);
+        if (table[index].getKey().equals(key)) {
+            table[index] = table[index].getNext();
+        }
+        delete(table[index], key);
+    }
+
+    private void delete(HashNode<K,V> node, K key) {
+        if (node == null) {
+            return;
+        }
+        if (node.getKey().equals(key)) {
+            node = node.getNext();
+            return;
         }
     }
 
-
-    // Función de hash simple
-    private int hashFunction(int id) {
-        return id % TABLE_SIZE;
-    }
-
-    public void print() {
-        for (int i = 0; i < TABLE_SIZE; i++) {
-            System.out.println("Lista " + i + ":");
-            table[i].print();
-        }
+    @Override
+    public String print() {
+        return "";
     }
 
 
