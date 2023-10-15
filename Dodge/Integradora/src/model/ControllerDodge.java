@@ -118,6 +118,7 @@ public class ControllerDodge {
     }
 
     public String showAllTask() {
+        System.out.println("Contenido de taskQueue: " + taskQueue.print());
         return taskQueue.print();
     }
 
