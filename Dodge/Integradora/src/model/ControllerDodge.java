@@ -118,14 +118,7 @@ public class ControllerDodge {
     }
 
     public String showAllTask() {
-
-        String msg = "";
-
-        for (int i = 0; i < taskQueue.getSize(); i++) {
-            msg+= (i+1)+"Label:"+taskQueue.get(i).getLabel() + "\n";
-        }
-
-        return msg;
+        return taskQueue.print();
     }
 
   

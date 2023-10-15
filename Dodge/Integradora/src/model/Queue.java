@@ -85,4 +85,14 @@ public class Queue<T> {
         return current.getValue();
     }
     
+
+    public String print() {
+        StringBuilder result = new StringBuilder();
+        Nodo<T> current = first;
+        while (current != null) {
+            result.append(current.getValue()).append("\n");
+            current = current.getNext();
+        }
+        return result.toString();
+    }
 }
