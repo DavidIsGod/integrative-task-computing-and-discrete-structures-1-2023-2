@@ -2,7 +2,7 @@ package model;
 
 public interface IStack<T>{
 
-     boolean push(T value);
+    boolean push(T value);
 
     T pop();
 

@@ -1,6 +1,6 @@
 package model;
 
-public class PriorityQueue implements IPriorityQueue{
+public class PriorityQueue<T>{
 
     private Nodo<T> first;
 
@@ -12,6 +12,7 @@ public class PriorityQueue implements IPriorityQueue{
 
     }
 
+    
     public boolean enqueue(T value) {
         Nodo<T> nuevoNodo = new Nodo<>(value);
         boolean flag = false;
@@ -24,6 +25,8 @@ public class PriorityQueue implements IPriorityQueue{
         }
         size++;
         return flag;
-
     }
+
+    
+    
 }

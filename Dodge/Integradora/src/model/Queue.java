@@ -54,6 +54,23 @@ public class Queue<T> {
     public boolean isEmpty() {
         return size == 0;
     }
+    public void delete(T value) {
+        Nodo<T> current = first;
+        Nodo<T> previous = null;
+        while (current != null) {
+            if (current.getValue().equals(value)) {
+                if (previous == null) {
+                    first = first.getNext();
+                } else {
+                    previous.setNext(current.getNext());
+                }
+                size--;
+                return;
+            }
+            previous = current;
+            current = current.getNext();
+        }
+    }
 
 
 

@@ -1,50 +1,35 @@
 package model;
 
-public class Stack <K,T> {
+public class Stack <T> {
     private Nodo<T> top;
-
-    private int size = 0;
-
+    private int size;
     public Stack() {
-
+        top = null;
+        size = 0;
     }
-
-
-
-    public boolean push(T value) {
-        Nodo<T> nuevoNodo = new Nodo<>(value);
-        boolean flag = false;
-        if (top == null) {
-            top = nuevoNodo;
-        } else {
-            nuevoNodo.setNext(top);
-            top = nuevoNodo;
-        }
+    public void push(T value) {
+        Nodo<T> newNode = new Nodo<T>(value);
+        newNode.setNext(top);
+        top = newNode;
         size++;
-        return flag;
-
     }
-
 
     public T pop() {
-        T value = null;
-        if (top != null) {
-            value = top.getValue();
-            top = top.getNext();
-            size--;
+        if (top == null) {
+            return null;
         }
+        T value = top.getValue();
+        top = top.getNext();
+        size--;
         return value;
     }
-
     public T peek() {
-        T value = null;
-        if (top != null) {
-            value = top.getValue();
+        if (top == null) {
+            return null;
         }
-        return value;
+        return top.getValue();
     }
-
-    public int getSize() {
+    public int size() {
         return size;
     }
 
