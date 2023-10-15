@@ -66,7 +66,7 @@ public class Dodge {
     private void addTask() {
         System.out.println("Para agregar una Tarea debes proporcionar la siguiente información:");
         System.out.println("Enter the ID:");
-        int id = sc.nextInt();
+        String id = sc.nextLine();
         sc.nextLine();
         System.out.println("Enter the Title:");
         String label = sc.nextLine();
@@ -93,19 +93,55 @@ public class Dodge {
     }
 
     private void modifyTask() {
-        // Implementa la lógica para modificar una tarea
+        System.out.println("Para modificar una Tarea debes proporcionar la siguiente información:");
+        System.out.println("Enter the ID:");
+        String id = sc.nextLine();
+        sc.nextLine();
+        System.out.println("Enter the Title:");
+        String label = sc.nextLine();
+        System.out.println("Enter the information:");
+        String overview = sc.nextLine();
+        System.out.println("Enter the limit date");
+        System.out.println("Enter the day");
+        int day = sc.nextInt();
+        System.out.println("Enter the month");
+        int month = sc.nextInt();
+        System.out.println("Enter the year");
+        int year = sc.nextInt();
+        sc.nextLine();
+        System.out.println("Choose the priority: 1. Priority or 2. Non-Priority");
+        int priority = sc.nextInt();
+
+        Calendar deadline = dodge.creatCalendar(day, month, year);
+
+        if (dodge.addTask(id, label, overview, deadline, priority)) {
+            System.out.println("Task added successfully");
+        } else {
+            System.out.println("No se pudo agregar la tarea");
+        }
     }
 
     private void deleteTask() {
-        // Implementa la lógica para eliminar una tarea
+        System.out.println("Para eliminar una Tarea debes proporcionar la siguiente información:");
+        System.out.println("Enter the ID:");
+        String id = sc.nextLine();
+        sc.nextLine();
+        if (dodge.deleteTask(id)) {
+            System.out.println("Task deleted successfully");
+        } else {
+            System.out.println("No se pudo eliminar la tarea");
+        }
     }
-
+    // Implementa la lógica para mostrar todas las tareas
     private void showAllTask() {
-        // Implementa la lógica para mostrar todas las tareas
-    }
+        
+        System.out.println("Estas es la lista de todas las tareas registradas hasta el momento:");
+        System.out.println(dodge.showAllTask());
+    }   
 
     private void showTaskforPriority() {
-        // Implementa la lógica para mostrar tareas por prioridad
+        System.out.println("Esta es la lista de todas las tareas por prioridad:");
+        System.out.println(dodge.showAllTaskPriority());
     }
 
     private void undoLastAction() {
