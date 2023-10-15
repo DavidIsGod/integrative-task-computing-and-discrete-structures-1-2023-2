@@ -69,9 +69,9 @@ public class Dodge {
         int id = sc.nextInt();
         sc.nextLine();
         System.out.println("Enter the Title:");
-        String title = sc.nextLine();
+        String label = sc.nextLine();
         System.out.println("Enter the information:");
-        String summary = sc.nextLine();
+        String overview = sc.nextLine();
         System.out.println("Enter the limit date");
         System.out.println("Enter the day");
         int day = sc.nextInt();
@@ -85,7 +85,7 @@ public class Dodge {
 
         Calendar deadline = dodge.creatCalendar(day, month, year);
 
-        if (dodge.addTask(id, title, summary, deadline, priority)) {
+        if (dodge.addTask(id, label, overview, deadline, priority)) {
             System.out.println("Task added successfully");
         } else {
             System.out.println("No se pudo agregar la tarea");

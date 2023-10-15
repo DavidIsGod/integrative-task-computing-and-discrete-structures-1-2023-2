@@ -28,10 +28,10 @@ public class ControllerDodge {
 
         if (task.getPriority() == 0) {
             taskQueue.enqueue(task);
-            taskHashTable.insert(id, task);
+            taskHashTable.add(id, task);
         } else {
-            taskPriorityQueue.insert(task.getPriority(), task);
-            taskHashTable.insert(task.getId(),task);
+            taskPriorityQueue.add(task.getPriority(), task);
+            taskHashTable.add(task.getId(),task);
         }
         userAction(0, task);
         return true;
@@ -59,16 +59,16 @@ public class ControllerDodge {
         Task copy = new Task(taskToModify);
         switch (modifyAction) {
             case 1://"title":
-                taskToModify.setTitle(modify);
+                taskToModify.setLabel(modify);
 
                 break;
             case 2://"description":
-                taskToModify.setSummary(modify);
+                taskToModify.setOverview(modify);
 
                 break;
             case 3://"deadLine":
-                //Manejo de fechas 
-                //taskToModify.setDeadline(modify);
+
+                taskToModify.setDeadline(modify);
 
 
                 break;
