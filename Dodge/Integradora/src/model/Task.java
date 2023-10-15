@@ -4,17 +4,29 @@ import java.util.Calendar;
 
 public class Task {
     private String summary;
-    private int id;
+    private String id;
     private Calendar deadline;
     private int priority;
     private String title;
 
-    public Task(String summary, int id, Calendar deadline, int priority, String title) {
+    public Task(String summary, String id, Calendar deadline, int priority, String title) {
         this.summary = summary;
         this.id = id;
         this.deadline = deadline;
         this.priority = priority;
         this.title = title;
+    }
+
+    public Task(Task taskToCopy){
+        this.summary = taskToCopy.getSummary();
+        this.id = taskToCopy.getId();
+        this.deadline = taskToCopy.getDeadline();
+        this.priority = taskToCopy.getPriority();
+        this.title = taskToCopy.getTitle();
+    }
+
+    public void setDeadline(Calendar deadline) {
+        this.deadline = deadline;
     }
 
     public Calendar getDeadline() {
@@ -45,11 +57,11 @@ public class Task {
         this.summary = summary;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 }
