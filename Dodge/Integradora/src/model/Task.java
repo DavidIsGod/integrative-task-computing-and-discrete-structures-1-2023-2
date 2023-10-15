@@ -25,8 +25,8 @@ public class Task {
         this.label = taskToCopy.getLabel();
     }
 
-    public void setDeadline(Calendar deadline) {
-        this.deadline = deadline;
+    public void setDeadline(Calendar date) {
+        this.deadline = date;
     }
 
     public Calendar getDeadline() {
@@ -64,4 +64,11 @@ public class Task {
     public void setId(String id) {
         this.id = id;
     }
+
+    public String toString(){
+        return "ID: " + id + "\n" +
+                "Title: " + label + "\n" +
+                "Information: " + overview + "\n" +
+                "Deadline: " + deadline.get(Calendar.DAY_OF_MONTH) + "/" + deadline.get(Calendar.MONTH) + "/" + deadline.get(Calendar.YEAR) + "\n" +
+                "Priority: " + priority + "\n";}
 }

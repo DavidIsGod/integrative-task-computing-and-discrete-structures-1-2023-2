@@ -1,6 +1,9 @@
 package model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class ControllerDodge {
@@ -30,7 +33,7 @@ public class ControllerDodge {
             taskQueue.enqueue(task);
             taskHashTable.add(id, task);
         } else {
-            taskPriorityQueue.add(task.getPriority(), task);
+            taskPriorityQueue.add(Integer.valueOf(task.getPriority()), task);
             taskHashTable.add(task.getId(),task);
         }
         userAction(0, task);
@@ -54,7 +57,7 @@ public class ControllerDodge {
         return true;
     }
 
-    public String modify(String modify, String Id, int modifyAction) {
+    public String modify(String modify, String Id, int modifyAction, Calendar date) {
         Task taskToModify = taskHashTable.search(Id);
         Task copy = new Task(taskToModify);
         switch (modifyAction) {
@@ -68,10 +71,17 @@ public class ControllerDodge {
                 break;
             case 3://"deadLine":
 
-                taskToModify.setDeadline(modify);
-
-
-                break;
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            String dateString = dateFormat.format(date.getTime());
+            try {
+                Date parsedDate = dateFormat.parse(dateString);
+                Calendar dateTaskModify = new GregorianCalendar();
+                dateTaskModify.setTime(parsedDate);
+                taskToModify.setDeadline(dateTaskModify);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            break;
             case 4://"priority":
                 taskToModify.setPriority(Integer.parseInt(modify));
                 break;
@@ -96,14 +106,34 @@ public class ControllerDodge {
                 deleteTask(userAction.getTask().getId());
                 break;
             case DELETE:
-                addTask(userAction.getTask().getId(), userAction.getTask().getTitle(), userAction.getTask().getSummary(), userAction.getTask().getDeadline(), userAction.getTask().getPriority());
+                addTask(userAction.getTask().getId(), userAction.getTask().getLabel(), userAction.getTask().getOverview(), userAction.getTask().getDeadline(), userAction.getTask().getPriority());
                 break;
             case MODIFY:
                 deleteTask(userAction.getTask().getId());
-                addTask(userAction.getTask().getId(), userAction.getTask().getTitle(), userAction.getTask().getSummary(), userAction.getTask().getDeadline(), userAction.getTask().getPriority());
+                addTask(userAction.getTask().getId(), userAction.getTask().getLabel(), userAction.getTask().getOverview(), userAction.getTask().getDeadline(), userAction.getTask().getPriority());
                 break;
         }
 
 
+    }
+
+    public String showAllTask() {
+
+        String msg = "";
+
+        for (int i = 0; i < taskQueue.getSize(); i++) {
+            msg+= (i+1)+"Label:"+taskQueue.get(i).getLabel() + "\n";
+        }
+
+        return msg;
+    }
+
+  
+    public String showAllTaskPriority() {
+       String msg = "";
+        for (int i = 0; i < taskPriorityQueue.getSize(); i++) {
+            ((Heap<Integer,Task>)taskPriorityQueue).print();
+        }
+        return msg;
     }
 }

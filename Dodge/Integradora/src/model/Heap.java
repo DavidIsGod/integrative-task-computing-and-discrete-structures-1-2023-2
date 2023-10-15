@@ -89,36 +89,10 @@ public class Heap<K extends Comparable<K>, T> implements IPriorityQueue<K, T> {
         return list.get(0).getKey();
     }
 
-    @Override
-    public String incrementKey(int position, K key) {
-        if (key.compareTo(list.get(position).getKey()) < 0) {
-            return "Not incrementing priority";
-        }
-        list.get(position).setKey(key);
-
-        while (position > 0 && list.get(getFather(position)).getKey().compareTo(list.get(position).getKey()) < 0) {
-
-            HeapNode<K, T> temporal = list.get(getFather(position));
-            list.set(getFather(position), list.get(position));
-            list.set(position, temporal);
-            position = getFather(position);
-        }
-        return "Increment done";
-    }
-
-    @Override
+   
+  
     public void insertElement(K key, T value) {
-        heapSize++;
-        list.add(new HeapNode<>(key, value));
-        int position = heapSize - 1;
-
-        while (position > 0 && list.get(getFather(position)).getKey().compareTo(list.get(position).getKey()) < 0) {
-
-            HeapNode<K, T> temporal = list.get(getFather(position));
-            list.set(getFather(position), list.get(position));
-            list.set(position, temporal);
-            position = getFather(position);
-        }
+ 
     }
 
     public Heap() {
@@ -153,5 +127,58 @@ public class Heap<K extends Comparable<K>, T> implements IPriorityQueue<K, T> {
         list.set(position, list.get(heapSize - 1));
         heapSize--;
         heapifyMax(position);
+    }
+
+    @Override
+    public String increaseKey(int position, K key) {
+            if (key.compareTo(list.get(position).getKey()) < 0) {
+            return "Not incrementing priority";
+        }
+        list.get(position).setKey(key);
+
+        while (position > 0 && list.get(getFather(position)).getKey().compareTo(list.get(position).getKey()) < 0) {
+
+            HeapNode<K, T> temporal = list.get(getFather(position));
+            list.set(getFather(position), list.get(position));
+            list.set(position, temporal);
+            position = getFather(position);
+        }
+        return "Increment done";
+    }
+
+    @Override
+    public void add(K key, T value) {
+         heapSize++;
+        list.add(new HeapNode<>(key, value));
+        int position = heapSize - 1;
+
+        while (position > 0 && list.get(getFather(position)).getKey().compareTo(list.get(position).getKey()) < 0) {
+
+            HeapNode<K, T> temporal = list.get(getFather(position));
+            list.set(getFather(position), list.get(position));
+            list.set(position, temporal);
+            position = getFather(position);
+        }
+    }
+
+    public T get(int index) {
+        if (index < 0 || index >= heapSize) {
+           
+            throw new IndexOutOfBoundsException("Índice fuera de límites");
+        }
+
+        return list.get(index).getValue();
+    }
+
+    public int getSize() {
+        return list.size();
+    }	
+
+    public String print() {
+        String message = "";
+        for (int i = 0; i < heapSize; i++) {
+            message += list.get(i).getValue() + " ";
+        }
+        return message;
     }
 }

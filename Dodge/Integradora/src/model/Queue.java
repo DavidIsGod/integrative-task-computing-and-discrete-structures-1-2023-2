@@ -72,12 +72,17 @@ public class Queue<T> {
         }
     }
 
-
-
-
-
-
-
-
-
+    public T get(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Índice fuera de límites");
+        }
+    
+        Nodo<T> current = first;
+        for (int i = 0; i < index; i++) {
+            current = current.getNext();
+        }
+    
+        return current.getValue();
+    }
+    
 }
