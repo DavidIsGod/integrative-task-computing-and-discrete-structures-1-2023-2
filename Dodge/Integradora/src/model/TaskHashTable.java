@@ -1,8 +1,8 @@
 package model;
 
-public class TaskHashTable <K,V> implements IHashTable<K,V> {
+public class TaskHashTable<K, V> implements IHashTable<K, V> {
 
-    private HashNode<K,V>[] table;
+    private HashNode<K, V>[] table;
     private int size;
 
     public TaskHashTable(int size) {
@@ -17,7 +17,7 @@ public class TaskHashTable <K,V> implements IHashTable<K,V> {
     @Override
     public void insert(K key, V value) {
         int index = hash(key);
-        HashNode<K,V> nodeToAdd = new HashNode<K,V>(key, value);
+        HashNode<K, V> nodeToAdd = new HashNode<K, V>(key, value);
         if (table[index] == null) {
             table[index] = nodeToAdd;
         } else {
@@ -32,7 +32,7 @@ public class TaskHashTable <K,V> implements IHashTable<K,V> {
         return search(table[index], key);
     }
 
-    private V search(HashNode<K,V> node, K key){
+    private V search(HashNode<K, V> node, K key) {
         if (node == null) {
             return null;
         }
@@ -51,7 +51,7 @@ public class TaskHashTable <K,V> implements IHashTable<K,V> {
         delete(table[index], key);
     }
 
-    private void delete(HashNode<K,V> node, K key) {
+    private void delete(HashNode<K, V> node, K key) {
         if (node == null) {
             return;
         }
@@ -65,6 +65,5 @@ public class TaskHashTable <K,V> implements IHashTable<K,V> {
     public String print() {
         return "";
     }
-
 
 }
