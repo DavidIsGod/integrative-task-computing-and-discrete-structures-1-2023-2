@@ -1,6 +1,10 @@
 package model;
 
+<<<<<<< HEAD
 public class PriorityQueue<T>{
+=======
+public class PriorityQueue implements IPriorityQueue {
+>>>>>>> f4836d7694b6ec8ec92f2cb1f560ca1004b02b0f
 
     private Nodo<T> first;
 
