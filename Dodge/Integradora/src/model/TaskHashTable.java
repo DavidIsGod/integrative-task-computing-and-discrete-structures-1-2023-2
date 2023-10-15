@@ -15,7 +15,7 @@ public class TaskHashTable<K, V> implements IHashTable<K, V> {
     }
 
     @Override
-    public void insert(K key, V value) {
+    public void add(K key, V value) {
         int index = hash(key);
         HashNode<K, V> nodeToAdd = new HashNode<K, V>(key, value);
         if (table[index] == null) {

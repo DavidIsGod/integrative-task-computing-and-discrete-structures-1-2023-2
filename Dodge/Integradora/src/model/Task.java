@@ -3,26 +3,26 @@ package model;
 import java.util.Calendar;
 
 public class Task {
-    private String summary;
+    private String overview;
     private String id;
     private Calendar deadline;
     private int priority;
-    private String title;
+    private String label;
 
-    public Task(String summary, String id, Calendar deadline, int priority, String title) {
-        this.summary = summary;
+    public Task(String overview, String id, Calendar deadline, int priority, String label) {
+        this.overview = overview;
         this.id = id;
         this.deadline = deadline;
         this.priority = priority;
-        this.title = title;
+        this.label = label;
     }
 
     public Task(Task taskToCopy){
-        this.summary = taskToCopy.getSummary();
+        this.overview = taskToCopy.getOverview();
         this.id = taskToCopy.getId();
         this.deadline = taskToCopy.getDeadline();
         this.priority = taskToCopy.getPriority();
-        this.title = taskToCopy.getTitle();
+        this.label = taskToCopy.getLabel();
     }
 
     public void setDeadline(Calendar deadline) {
@@ -41,20 +41,20 @@ public class Task {
         this.priority = priority;
     }
 
-    public String getTitle() {
-        return title;
+    public String getLabel() {
+        return label;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setLabel(String label) {
+        this.label = label;
     }
 
-    public String getSummary() {
-        return summary;
+    public String getOverview() {
+        return overview;
     }
 
-    public void setSummary(String summary) {
-        this.summary = summary;
+    public void setOverview(String overview) {
+        this.overview = overview;
     }
 
     public String getId() {
