@@ -92,7 +92,7 @@ public class Queue<T> {
     }
 
     public String print() {
-        String msg = " ";
+        String msg = "";
         Nodo<T> current = first;
         while (current != null) {
             msg += current.getValue() + "\n";

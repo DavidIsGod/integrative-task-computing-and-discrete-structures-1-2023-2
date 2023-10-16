@@ -124,7 +124,7 @@ public class ControllerDodge {
         if (taskQueue.isEmpty()) {
             msg += "La cola de tareas está vacía.";
         } else {
-            msg += "Contenido de taskQueue: \n" + taskQueue.print();
+            msg += "Contenido de taskQueue:\n" + taskQueue.print() + "\n";
         }
         return msg;
     }
