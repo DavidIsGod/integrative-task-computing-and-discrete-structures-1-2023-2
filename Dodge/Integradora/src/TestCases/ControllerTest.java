@@ -47,5 +47,45 @@ public class ControllerTest {
         assertNull(controller.search("001"));
     }
 
-    
+    @Test
+    public void testModifyTitle() {
+        
+        controller.addTask("001", "Tarea 1", "Resumen 1", setDeadline(2023, 7, 27), 1);
+
+       
+        String result = controller.modify("Nuevo Título", "001", 1);
+
+        
+        Task modifiedTask = controller.search("001");
+
+       
+        assertEquals("Se modifico correctamente", result);
+
+        
+        assertEquals("Nuevo Título", modifiedTask.getLabel());
+    }
+
+    @Test
+    public void testModifyDescription() {
+        // Agregar una tarea para modificar
+        controller.addTask("002", "Tarea 2", "Resumen 2", setDeadline(2023, 7, 27), 1);
+
+        // Modificar la descripción de la tarea
+        String result = controller.modify("Nueva Descripción", "002", 2);
+
+        // Obtener la tarea modificada
+        Task modifiedTask = controller.search("002");
+
+        // Verificar que el resultado del método sea el esperado
+        assertEquals("Se modifico correctamente", result);
+
+        // Verificar que la descripción de la tarea se haya modificado correctamente
+        assertEquals("Nueva Descripción", modifiedTask.getOverview());
+    }
+
+    private Calendar setDeadline(int year, int month, int day) {
+        Calendar deadline = Calendar.getInstance();
+        deadline.set(year, month - 1, day);  // Mes es 0-indexado
+        return deadline;
+    }
 }

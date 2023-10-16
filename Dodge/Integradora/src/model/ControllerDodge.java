@@ -28,19 +28,25 @@ public class ControllerDodge {
         return calendar;
     }
 
-    public boolean addTask(String id, String label, String overwiev, Calendar deadline, int priority) {
-        Task task = new Task(id, label, overwiev, deadline, priority);
-
-        if (task.getPriority() == 0) {
-            taskQueue.enqueue(task);
-            taskHashTable.add(id, task);
-        } else {
-            taskPriorityQueue.add(Integer.valueOf(task.getPriority()), task);
-            taskHashTable.add(task.getId(), task);
-        }
-        userAction(0, task);
-        return true;
+  public boolean addTask(String id, String label, String overview, Calendar deadline, int priority) {
+    if (id == null || label == null || overview == null || deadline == null) {
+        return false;
     }
+    Task task = new Task(id, label, overview, deadline, priority);
+    if (task == null) {
+        return false;
+    }
+    if (task.getPriority() == 0) {
+        taskQueue.enqueue(task);
+        taskHashTable.add(id, task);
+    } else {
+        taskPriorityQueue.add(Integer.valueOf(task.getPriority()), task);
+        taskHashTable.add(task.getId(), task);
+    }
+    userAction(0, task);
+    return true;
+}
+
 
     public Task search(String Id) {
         
