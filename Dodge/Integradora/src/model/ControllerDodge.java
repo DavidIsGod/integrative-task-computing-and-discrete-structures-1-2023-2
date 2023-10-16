@@ -48,7 +48,7 @@ public class ControllerDodge {
     }
 
     public boolean deleteTask(String Id) {
-    try {
+    /*try {
         Task task = taskHashTable.search(Id);
 
         if (task != null) {
@@ -63,38 +63,48 @@ public class ControllerDodge {
         
         System.out.println(e.getMessage());
         return false;
-    }
+    }*/
+    boolean result = false;
+    Task task = taskHashTable.search(Id);
+    if (task != null) {
+        taskHashTable.delete(Id);
+        if(task.getPriority() == 0){
+            taskQueue.delete(task);
+        }else{
+            taskPriorityQueue.delete(task);
+        }
+        userAction(1, task);
+        result = true;
+    } 
+    return result;
 }
 
-    public String modify(String modify, String Id, int modifyAction, Calendar date) {
+    public String modify(String modify, String Id, int modifyAction) {
         Task taskToModify = taskHashTable.search(Id);
         Task copy = new Task(taskToModify);
         switch (modifyAction) {
             case 1:// "title":
                 taskToModify.setLabel(modify);
-
                 break;
             case 2:// "description":
                 taskToModify.setOverview(modify);
-
                 break;
             case 3:// "deadLine":
 
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                String dateString = dateFormat.format(date.getTime());
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                Date date = null;
                 try {
-                    Date parsedDate = dateFormat.parse(dateString);
-                    Calendar dateTaskModify = new GregorianCalendar();
-                    dateTaskModify.setTime(parsedDate);
-                    taskToModify.setDeadline(dateTaskModify);
+                    date = sdf.parse(modify);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(date);
+                taskToModify.setDeadline(calendar);
                 break;
             case 4:// "priority":
                 taskToModify.setPriority(Integer.parseInt(modify));
                 break;
-
             default:
                 break;
         }
@@ -130,19 +140,27 @@ public class ControllerDodge {
 
     public String showAllTaskPriority() {
         String msg = "";
-        for (int i = 0; i < taskPriorityQueue.getSize(); i++) {
-            ((Heap<Integer, Task>) taskPriorityQueue).print();
+        if (((Heap<Integer, Task>)taskPriorityQueue).getSize() == 0) {
+            msg += "La cola de tareas por prioridad está vacía.";
+        } else {
+            msg += "Contenido de cola de tareas por prioridad:\n" + ((Heap<Integer, Task>)taskPriorityQueue).print() + "\n";
         }
         return msg;
     }
 
     public String showAllTask() {
         String msg = "";
-        System.out.println(taskQueue.getSize());
+        //System.out.println(taskQueue.getSize());
         if (taskQueue.isEmpty()) {
-            msg += "La cola de tareas está vacía.";
+            msg += "La cola de tareas no prioritarias está vacía. \n";
         } else {
             msg += "Contenido de taskQueue:\n" + taskQueue.print() + "\n";
+        }
+
+        if (((Heap<Integer, Task>)taskPriorityQueue).getSize() == 0) {
+            msg += "La cola de tareas por prioridad está vacía.";
+        } else {
+            msg += "Contenido de cola de tareas por prioridad:\n" + ((Heap<Integer, Task>)taskPriorityQueue).print();
         }
         return msg;
     }

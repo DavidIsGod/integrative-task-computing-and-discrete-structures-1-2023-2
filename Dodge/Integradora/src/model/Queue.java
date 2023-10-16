@@ -12,17 +12,15 @@ public class Queue<T> {
     }
 
     public boolean enqueue(T value) {
-        Nodo<T> nuevoNodo = new Nodo<>(value);
+        Nodo<T> newNode = new Nodo<>(value);
         boolean flag = false;
         if (first == null) {
-            first = nuevoNodo;
-            last = nuevoNodo;
+            first = newNode;
+            last = newNode;
             size++;
-
         } else {
-
-            Nodo<T> newNode = nuevoNodo;
             last.setSiguiente(newNode);
+            last = newNode;
             size++;
         }
         setSize(size);
@@ -92,13 +90,18 @@ public class Queue<T> {
     }
 
     public String print() {
-        String msg = "";
-        Nodo<T> current = first;
-        while (current != null) {
-            msg += current.getValue() + "\n";
-            current = current.getSiguiente();
+        if (first == null) {
+            return "La cola está vacía";
         }
-        return msg;
+        return print(first);
+
+    }
+
+    private String print(Nodo<T> current) {
+        if (current == null) {
+            return "";
+        }
+        return current.getValue().toString() + "\n" + print(current.getSiguiente());
     }
 
 }
