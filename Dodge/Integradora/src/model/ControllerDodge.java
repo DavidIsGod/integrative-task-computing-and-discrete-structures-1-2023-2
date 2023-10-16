@@ -8,8 +8,8 @@ import java.util.GregorianCalendar;
 
 public class ControllerDodge {
 
-    private Queue <Task> taskQueue;
-    private IPriorityQueue<Integer, Task> taskPriorityQueue  = new Heap<>();
+    private Queue<Task> taskQueue;
+    private IPriorityQueue<Integer, Task> taskPriorityQueue = new Heap<>();
     private Stack<Action> userActionsStack;
 
     private TaskHashTable<String, Task> taskHashTable;
@@ -34,7 +34,7 @@ public class ControllerDodge {
             taskHashTable.add(id, task);
         } else {
             taskPriorityQueue.add(Integer.valueOf(task.getPriority()), task);
-            taskHashTable.add(task.getId(),task);
+            taskHashTable.add(task.getId(), task);
         }
         userAction(0, task);
         return true;
@@ -43,7 +43,6 @@ public class ControllerDodge {
     public Task search(String Id) {
         return taskHashTable.search(Id);
     }
-
 
     public boolean deleteTask(String Id) {
         Task task = (Task) taskHashTable.search(Id);
@@ -61,28 +60,28 @@ public class ControllerDodge {
         Task taskToModify = taskHashTable.search(Id);
         Task copy = new Task(taskToModify);
         switch (modifyAction) {
-            case 1://"title":
+            case 1:// "title":
                 taskToModify.setLabel(modify);
 
                 break;
-            case 2://"description":
+            case 2:// "description":
                 taskToModify.setOverview(modify);
 
                 break;
-            case 3://"deadLine":
+            case 3:// "deadLine":
 
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            String dateString = dateFormat.format(date.getTime());
-            try {
-                Date parsedDate = dateFormat.parse(dateString);
-                Calendar dateTaskModify = new GregorianCalendar();
-                dateTaskModify.setTime(parsedDate);
-                taskToModify.setDeadline(dateTaskModify);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            break;
-            case 4://"priority":
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                String dateString = dateFormat.format(date.getTime());
+                try {
+                    Date parsedDate = dateFormat.parse(dateString);
+                    Calendar dateTaskModify = new GregorianCalendar();
+                    dateTaskModify.setTime(parsedDate);
+                    taskToModify.setDeadline(dateTaskModify);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                break;
+            case 4:// "priority":
                 taskToModify.setPriority(Integer.parseInt(modify));
                 break;
 
@@ -93,40 +92,47 @@ public class ControllerDodge {
         return "Se modifico correctamente";
     }
 
-
-    public void userAction(int action, Task agenda){
-        Action userAction = new Action(ActionType.values()[action],  agenda);
+    public void userAction(int action, Task agenda) {
+        Action userAction = new Action(ActionType.values()[action], agenda);
         userActionsStack.push(userAction);
     }
 
-    public void undone(){
+    public void undone() {
         Action userAction = userActionsStack.pop();
-        switch (userAction.getAction()){
+        switch (userAction.getAction()) {
             case ADD:
                 deleteTask(userAction.getTask().getId());
                 break;
             case DELETE:
-                addTask(userAction.getTask().getId(), userAction.getTask().getLabel(), userAction.getTask().getOverview(), userAction.getTask().getDeadline(), userAction.getTask().getPriority());
+                addTask(userAction.getTask().getId(), userAction.getTask().getLabel(),
+                        userAction.getTask().getOverview(), userAction.getTask().getDeadline(),
+                        userAction.getTask().getPriority());
                 break;
             case MODIFY:
                 deleteTask(userAction.getTask().getId());
-                addTask(userAction.getTask().getId(), userAction.getTask().getLabel(), userAction.getTask().getOverview(), userAction.getTask().getDeadline(), userAction.getTask().getPriority());
+                addTask(userAction.getTask().getId(), userAction.getTask().getLabel(),
+                        userAction.getTask().getOverview(), userAction.getTask().getDeadline(),
+                        userAction.getTask().getPriority());
                 break;
         }
-
 
     }
 
     public String showAllTask() {
-        System.out.println("Contenido de taskQueue: " + taskQueue.print());
-        return taskQueue.print();
+        String msg = "";
+        System.out.println(taskQueue.getSize());
+        if (taskQueue.isEmpty()) {
+            msg += "La cola de tareas está vacía.";
+        } else {
+            msg += "Contenido de taskQueue: " + taskQueue.print();
+        }
+        return msg;
     }
 
-  
     public String showAllTaskPriority() {
-       String msg = "";
+        String msg = "";
         for (int i = 0; i < taskPriorityQueue.getSize(); i++) {
-            ((Heap<Integer,Task>)taskPriorityQueue).print();
+            ((Heap<Integer, Task>) taskPriorityQueue).print();
         }
         return msg;
     }

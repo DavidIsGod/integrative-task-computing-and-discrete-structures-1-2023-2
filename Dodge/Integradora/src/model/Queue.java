@@ -1,9 +1,6 @@
 package model;
 
-
-
 public class Queue<T> {
-
 
     private Nodo<T> first;
     private Nodo<T> last;
@@ -20,11 +17,14 @@ public class Queue<T> {
         if (first == null) {
             first = nuevoNodo;
             last = nuevoNodo;
+            size++;
+
         } else {
             last.setNext(nuevoNodo);
             last = nuevoNodo;
+            size++;
         }
-        size++;
+        setSize(size);
         return flag;
 
     }
@@ -51,9 +51,14 @@ public class Queue<T> {
         return size;
     }
 
+    public void setSize(int size) {
+        this.size = size;
+    }
+
     public boolean isEmpty() {
         return size == 0;
     }
+
     public void delete(T value) {
         Nodo<T> current = first;
         Nodo<T> previous = null;
@@ -76,15 +81,14 @@ public class Queue<T> {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Índice fuera de límites");
         }
-    
+
         Nodo<T> current = first;
         for (int i = 0; i < index; i++) {
             current = current.getNext();
         }
-    
+
         return current.getValue();
     }
-    
 
     public String print() {
         StringBuilder result = new StringBuilder();
