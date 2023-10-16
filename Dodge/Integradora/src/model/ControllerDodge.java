@@ -118,6 +118,14 @@ public class ControllerDodge {
 
     }
 
+    public String showAllTaskPriority() {
+        String msg = "";
+        for (int i = 0; i < taskPriorityQueue.getSize(); i++) {
+            ((Heap<Integer, Task>) taskPriorityQueue).print();
+        }
+        return msg;
+    }
+
     public String showAllTask() {
         String msg = "";
         System.out.println(taskQueue.getSize());
@@ -129,11 +137,4 @@ public class ControllerDodge {
         return msg;
     }
 
-    public String showAllTaskPriority() {
-        String msg = "";
-        for (int i = 0; i < taskPriorityQueue.getSize(); i++) {
-            ((Heap<Integer, Task>) taskPriorityQueue).print();
-        }
-        return msg;
-    }
 }

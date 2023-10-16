@@ -34,7 +34,7 @@ public class Queue<T> {
         T value = null;
         if (first != null) {
             value = first.getValue();
-            first = first.getNext();
+            first = first.getSiguiente();
             size--;
         }
         return value;
@@ -66,15 +66,15 @@ public class Queue<T> {
         while (current != null) {
             if (current.getValue().equals(value)) {
                 if (previous == null) {
-                    first = first.getNext();
+                    first = first.getSiguiente();
                 } else {
-                    previous.setNext(current.getNext());
+                    previous.setSiguiente(current.getSiguiente());
                 }
                 size--;
                 return;
             }
             previous = current;
-            current = current.getNext();
+            current = current.getSiguiente();
         }
     }
 
@@ -85,7 +85,7 @@ public class Queue<T> {
 
         Nodo<T> current = first;
         for (int i = 0; i < index; i++) {
-            current = current.getNext();
+            current = current.getSiguiente();
         }
 
         return current.getValue();
@@ -100,4 +100,5 @@ public class Queue<T> {
         }
         return msg;
     }
+
 }
