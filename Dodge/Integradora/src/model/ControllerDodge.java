@@ -48,22 +48,6 @@ public class ControllerDodge {
     }
 
     public boolean deleteTask(String Id) {
-    /*try {
-        Task task = taskHashTable.search(Id);
-
-        if (task != null) {
-            taskHashTable.delete(task.getId());
-            userAction(1, task);
-            return true;
-        } else {
-           
-            throw new ListNullException("La tarea con ID " + Id + " no existe.");
-        }
-    } catch (ListNullException e) {
-        
-        System.out.println(e.getMessage());
-        return false;
-    }*/
     boolean result = false;
     Task task = taskHashTable.search(Id);
     if (task != null) {
@@ -150,7 +134,6 @@ public class ControllerDodge {
 
     public String showAllTask() {
         String msg = "";
-        //System.out.println(taskQueue.getSize());
         if (taskQueue.isEmpty()) {
             msg += "La cola de tareas no prioritarias está vacía. \n";
         } else {
