@@ -1,8 +1,12 @@
 package ui;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Scanner;
+import model.Task;
 
 import model.ControllerDodge;
 
@@ -40,7 +44,7 @@ public class Dodge {
                     addTask();
                     break;
                 case 2:
-                    modifyTask();
+                    modifyTask(null, null, value, null);
                     break;
                 case 3:
                     deleteTask();
@@ -105,13 +109,55 @@ public class Dodge {
 
     }
 
-    private void modifyTask() {
+    private void modifyTask(String modify, String Id, int modifyAction, Calendar date) {
 
-        System.out.println("for modify the task, we need to delete the last task.");
-        deleteTask();
-        addTask();
+              try {
+            
+            Task taskToModify = dodge.search(Id);
+            if (taskToModify == null) {
+                System.out.println("La tarea con ID " + Id + " no existe."); 
+            }
 
+            
+            Task copy = new Task(taskToModify);
+
+            
+            switch (modifyAction) {
+                case 1: // "title"
+                    taskToModify.setLabel(modify);
+                    break;
+                case 2: // "description"
+                    taskToModify.setOverview(modify);
+                    break;
+                case 3: // "deadLine"
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                    Date parsedDate = dateFormat.parse(modify);
+                    Calendar dateTaskModify = new GregorianCalendar();
+                    dateTaskModify.setTime(parsedDate);
+                    taskToModify.setDeadline(dateTaskModify);
+                    break;
+                case 4: // "priority"
+                    taskToModify.setPriority(Integer.parseInt(modify));
+                    break;
+                    default:
+                    System.out.println("Accion no válida");
+                    break;
+            }
+
+            
+            dodge.userAction(2, copy);
+            System.out.println("Se modificó correctamente.");;
+
+        } catch (ParseException e) {
+            System.out.println("Error al parsear la fecha.");;
+        }
     }
+
+    private static String formatDate(Calendar date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        return dateFormat.format(date.getTime());
+    }
+    
 
     private void deleteTask() {
         System.out.println("Para eliminar una Tarea debes proporcionar la siguiente información:");

@@ -47,7 +47,7 @@ public class ControllerDodge {
         return taskHashTable.search(Id);
     }
 
-    -public boolean deleteTask(String Id) {
+    public boolean deleteTask(String Id) {
     try {
         Task task = taskHashTable.search(Id);
 
