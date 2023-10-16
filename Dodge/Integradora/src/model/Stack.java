@@ -1,15 +1,17 @@
 package model;
 
-public class Stack <T> {
+public class Stack<T> {
     private Nodo<T> top;
     private int size;
+
     public Stack() {
         top = null;
         size = 0;
     }
+
     public void push(T value) {
         Nodo<T> newNode = new Nodo<T>(value);
-        newNode.setNext(top);
+        newNode.setSiguiente(top);
         top = newNode;
         size++;
     }
@@ -19,16 +21,18 @@ public class Stack <T> {
             return null;
         }
         T value = top.getValue();
-        top = top.getNext();
+        top = top.getSiguiente();
         size--;
         return value;
     }
+
     public T peek() {
         if (top == null) {
             return null;
         }
         return top.getValue();
     }
+
     public int size() {
         return size;
     }
@@ -36,6 +40,5 @@ public class Stack <T> {
     public boolean isEmpty() {
         return size == 0;
     }
-
 
 }

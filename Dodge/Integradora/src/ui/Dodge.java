@@ -106,32 +106,11 @@ public class Dodge {
     }
 
     private void modifyTask() {
-        System.out.println("Para modificar una Tarea debes proporcionar la siguiente información:");
-        System.out.println("Enter the ID:");
-        String id = sc.nextLine();
-        sc.nextLine();
-        System.out.println("Enter the Title:");
-        String label = sc.nextLine();
-        System.out.println("Enter the information:");
-        String overview = sc.nextLine();
-        System.out.println("Enter the limit date");
-        System.out.println("Enter the day");
-        int day = sc.nextInt();
-        System.out.println("Enter the month");
-        int month = sc.nextInt();
-        System.out.println("Enter the year");
-        int year = sc.nextInt();
-        sc.nextLine();
-        System.out.println("Choose the priority: 1. Priority or 2. Non-Priority");
-        int priority = sc.nextInt();
 
-        Calendar deadline = dodge.creatCalendar(day, month, year);
+        System.out.println("for modify the task, we need to delete the last task.");
+        deleteTask();
+        addTask();
 
-        if (dodge.addTask(id, label, overview, deadline, priority)) {
-            System.out.println("Task added successfully");
-        } else {
-            System.out.println("No se pudo agregar la tarea");
-        }
     }
 
     private void deleteTask() {

@@ -9,7 +9,6 @@ public class Nodo<T> {
         this.siguiente = null;
     }
 
-    private Nodo<T> next;
     private Nodo<T> previous;
 
     public T getValor() {
@@ -43,14 +42,6 @@ public class Nodo<T> {
 
     public void setValue(T valor) {
         this.valor = valor;
-    }
-
-    public Nodo<T> getNext() {
-        return next.getNext();
-    }
-
-    public void setNext(Nodo<T> next) {
-        this.next = next;
     }
 
     public void setPrevious(Nodo<T> previous) {
