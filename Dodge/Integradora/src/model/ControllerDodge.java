@@ -43,41 +43,22 @@ public class ControllerDodge {
     }
 
     public Task search(String Id) {
-
+        
         return taskHashTable.search(Id);
     }
 
     public boolean deleteTask(String Id) {
-<<<<<<< HEAD
     /*try {
-=======
-<<<<<<< HEAD
-    /*try {
-=======
-<<<<<<< HEAD
-        try {
-            Task task = taskHashTable.search(Id);
-=======
-    try {
->>>>>>> 8054405d8152dd7d060d5cd3cf0dd7b9b1a89590
->>>>>>> 885f667cdea97df7b74beff6780fd169da79550f
         Task task = taskHashTable.search(Id);
->>>>>>> 943b12c47866fbc36b1b27ed34a43c45ab85d2e9
 
-            if (task != null) {
-                taskHashTable.delete(task.getId());
-                userAction(1, task);
-                return true;
-            } else {
-
-                throw new ListNullException("La tarea con ID " + Id + " no existe.");
-            }
-        } catch (ListNullException e) {
-
-            System.out.println(e.getMessage());
-            return false;
+        if (task != null) {
+            taskHashTable.delete(task.getId());
+            userAction(1, task);
+            return true;
+        } else {
+           
+            throw new ListNullException("La tarea con ID " + Id + " no existe.");
         }
-<<<<<<< HEAD
     } catch (ListNullException e) {
         
         System.out.println(e.getMessage());
@@ -97,9 +78,6 @@ public class ControllerDodge {
     } 
     return result;
 }
-=======
-    }
->>>>>>> 8054405d8152dd7d060d5cd3cf0dd7b9b1a89590
 
     public String modify(String modify, String Id, int modifyAction) {
         Task taskToModify = taskHashTable.search(Id);
