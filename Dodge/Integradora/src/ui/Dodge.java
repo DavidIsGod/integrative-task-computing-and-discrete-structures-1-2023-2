@@ -107,7 +107,7 @@ public class Dodge {
 
     private void modifyTask() {
 
-        System.out.println("for modify the task, we need to delete the last task.");
+        System.out.println("To modify the task, we need to delete the task.");
         deleteTask();
         addTask();
 

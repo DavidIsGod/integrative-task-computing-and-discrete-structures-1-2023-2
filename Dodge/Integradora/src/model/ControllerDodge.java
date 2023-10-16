@@ -43,28 +43,28 @@ public class ControllerDodge {
     }
 
     public Task search(String Id) {
-        
+
         return taskHashTable.search(Id);
     }
 
-    -public boolean deleteTask(String Id) {
-    try {
-        Task task = taskHashTable.search(Id);
+    public boolean deleteTask(String Id) {
+        try {
+            Task task = taskHashTable.search(Id);
 
-        if (task != null) {
-            taskHashTable.delete(task.getId());
-            userAction(1, task);
-            return true;
-        } else {
-           
-            throw new ListNullException("La tarea con ID " + Id + " no existe.");
+            if (task != null) {
+                taskHashTable.delete(task.getId());
+                userAction(1, task);
+                return true;
+            } else {
+
+                throw new ListNullException("La tarea con ID " + Id + " no existe.");
+            }
+        } catch (ListNullException e) {
+
+            System.out.println(e.getMessage());
+            return false;
         }
-    } catch (ListNullException e) {
-        
-        System.out.println(e.getMessage());
-        return false;
     }
-}
 
     public String modify(String modify, String Id, int modifyAction, Calendar date) {
         Task taskToModify = taskHashTable.search(Id);
