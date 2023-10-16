@@ -48,8 +48,13 @@ public class ControllerDodge {
     }
 
     public boolean deleteTask(String Id) {
+<<<<<<< HEAD
         try {
             Task task = taskHashTable.search(Id);
+=======
+    try {
+        Task task = taskHashTable.search(Id);
+>>>>>>> 943b12c47866fbc36b1b27ed34a43c45ab85d2e9
 
             if (task != null) {
                 taskHashTable.delete(task.getId());

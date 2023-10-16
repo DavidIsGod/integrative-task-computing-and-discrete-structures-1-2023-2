@@ -1,8 +1,12 @@
 package ui;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Scanner;
+import model.Task;
 
 import model.ControllerDodge;
 
@@ -106,13 +110,62 @@ public class Dodge {
     }
 
     private void modifyTask() {
+        
+              try {
+            Task taskToModify = dodge.search(taskToModify.getId());
+            if (taskToModify == null) {
+                System.out.println("La tarea con ID " + taskToModify.getId() + " no existe."); 
+            }
 
+<<<<<<< HEAD
         System.out.println("To modify the task, we need to delete the task.");
         deleteTask();
         addTask();
+=======
+            
+            Task copy = new Task(taskToModify);
+            System.out.println("¿Qué deseas modificar? \n1.Label \n2.Overview \n3.Date \n4.Priority" );
+            int val = sc.nextInt();
+            System.out.println("Escribe la modificaciona realizar: ");
+            String modify = "";
+            
+            
+            switch (val) {
+                case 1: // "title"
+                    modify = sc.nextLine();
+                  sc.nextLine();
+                    taskToModify.setLabel(modify);
+                    break;
+                case 2: // "description"
+                modify = sc.nextLine();
+                    taskToModify.setOverview(modify);
+                    break;
+                case 3: // "deadLine"
+                modify = sc.nextLine();
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                    Date parsedDate = dateFormat.parse(modify);
+                    Calendar dateTaskModify = new GregorianCalendar();
+                    dateTaskModify.setTime(parsedDate);
+                    taskToModify.setDeadline(dateTaskModify);
+                    break;
+                case 4: // "priority"
+                modify = sc.nextLine();
+                    taskToModify.setPriority(Integer.parseInt(modify));
+                    break;
+                    default:
+                    System.out.println("Accion no válida");
+                    break;
+            }
+>>>>>>> 943b12c47866fbc36b1b27ed34a43c45ab85d2e9
 
+            
+            dodge.userAction(2, copy);
+            System.out.println("Se modificó correctamente.");;
+
+        } catch (ParseException e) {
+            System.out.println("Error al parsear la fecha.");;
+        }
     }
-
     private void deleteTask() {
         System.out.println("Para eliminar una Tarea debes proporcionar la siguiente información:");
         System.out.println("Enter the ID:");
