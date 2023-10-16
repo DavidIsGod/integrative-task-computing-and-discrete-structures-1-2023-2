@@ -103,6 +103,7 @@ public class Dodge {
     }
 
     private void modifyTask() {
+<<<<<<< HEAD
         System.out.println("Para modificar una Tarea debes proporcionar la siguiente información:");
         System.out.println("Enter the ID:");
         String id = sc.nextLine();
@@ -112,6 +113,35 @@ public class Dodge {
         String modify = "";
         switch (val) {
             case 1: // "title"
+=======
+        
+              try {
+            Task taskToModify = dodge.search(taskToModify.getId());
+            if (taskToModify == null) {
+                System.out.println("La tarea con ID " + taskToModify.getId() + " no existe."); 
+            }
+
+<<<<<<< HEAD
+        System.out.println("To modify the task, we need to delete the task.");
+        deleteTask();
+        addTask();
+=======
+            
+            Task copy = new Task(taskToModify);
+            System.out.println("¿Qué deseas modificar? \n1.Label \n2.Overview \n3.Date \n4.Priority" );
+            int val = sc.nextInt();
+            System.out.println("Escribe la modificaciona realizar: ");
+            String modify = "";
+            
+            
+            switch (val) {
+                case 1: // "title"
+                    modify = sc.nextLine();
+                  sc.nextLine();
+                    taskToModify.setLabel(modify);
+                    break;
+                case 2: // "description"
+>>>>>>> 8054405d8152dd7d060d5cd3cf0dd7b9b1a89590
                 modify = sc.nextLine();
                 break;
             case 2: // "description"
@@ -119,6 +149,7 @@ public class Dodge {
                 break;
             case 3: // "deadLine"
                 modify = sc.nextLine();
+<<<<<<< HEAD
                 break;
             case 4: // "priority"
                 modify = sc.nextLine();
@@ -126,6 +157,22 @@ public class Dodge {
             default:
                 System.out.println("Accion no válida");
                 break;
+=======
+                    taskToModify.setPriority(Integer.parseInt(modify));
+                    break;
+                    default:
+                    System.out.println("Accion no válida");
+                    break;
+            }
+>>>>>>> 943b12c47866fbc36b1b27ed34a43c45ab85d2e9
+
+            
+            dodge.userAction(2, copy);
+            System.out.println("Se modificó correctamente.");;
+
+        } catch (ParseException e) {
+            System.out.println("Error al parsear la fecha.");;
+>>>>>>> 8054405d8152dd7d060d5cd3cf0dd7b9b1a89590
         }
         dodge.modify(modify, id, val);
         System.out.println("Se modificó correctamente.");
