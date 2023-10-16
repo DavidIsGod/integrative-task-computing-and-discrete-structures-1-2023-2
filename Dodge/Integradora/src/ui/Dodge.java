@@ -44,7 +44,7 @@ public class Dodge {
                     addTask();
                     break;
                 case 2:
-                    modifyTask(null, null, value, null);
+                    modifyTask();
                     break;
                 case 3:
                     deleteTask();
@@ -109,27 +109,34 @@ public class Dodge {
 
     }
 
-    private void modifyTask(String modify, String Id, int modifyAction, Calendar date) {
-
+    private void modifyTask() {
+        
               try {
-            
-            Task taskToModify = dodge.search(Id);
+            Task taskToModify = dodge.search(taskToModify.getId());
             if (taskToModify == null) {
-                System.out.println("La tarea con ID " + Id + " no existe."); 
+                System.out.println("La tarea con ID " + taskToModify.getId() + " no existe."); 
             }
 
             
             Task copy = new Task(taskToModify);
-
+            System.out.println("¿Qué deseas modificar? \n1.Label \n2.Overview \n3.Date \n4.Priority" );
+            int val = sc.nextInt();
+            System.out.println("Escribe la modificaciona realizar: ");
+            String modify = "";
             
-            switch (modifyAction) {
+            
+            switch (val) {
                 case 1: // "title"
+                    modify = sc.nextLine();
+                  sc.nextLine();
                     taskToModify.setLabel(modify);
                     break;
                 case 2: // "description"
+                modify = sc.nextLine();
                     taskToModify.setOverview(modify);
                     break;
                 case 3: // "deadLine"
+                modify = sc.nextLine();
                     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                     Date parsedDate = dateFormat.parse(modify);
                     Calendar dateTaskModify = new GregorianCalendar();
@@ -137,6 +144,7 @@ public class Dodge {
                     taskToModify.setDeadline(dateTaskModify);
                     break;
                 case 4: // "priority"
+                modify = sc.nextLine();
                     taskToModify.setPriority(Integer.parseInt(modify));
                     break;
                     default:
@@ -152,13 +160,6 @@ public class Dodge {
             System.out.println("Error al parsear la fecha.");;
         }
     }
-
-    private static String formatDate(Calendar date) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        return dateFormat.format(date.getTime());
-    }
-    
-
     private void deleteTask() {
         System.out.println("Para eliminar una Tarea debes proporcionar la siguiente información:");
         System.out.println("Enter the ID:");
