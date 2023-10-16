@@ -116,17 +116,15 @@ public class Heap<K extends Comparable<K>, T> implements IPriorityQueue<K, T> {
         this.heapSize = heapSize;
     }
 
+    @Override
     public void delete(T value) {
-        int position = 0;
+        //System.out.println("Deleting " + value.toString());
         for (int i = 0; i < heapSize; i++) {
             if (list.get(i).getValue().equals(value)) {
-                position = i;
+                list.remove(i);
                 break;
             }
         }
-        list.set(position, list.get(heapSize - 1));
-        heapSize--;
-        heapifyMax(position);
     }
 
     @Override
@@ -175,10 +173,15 @@ public class Heap<K extends Comparable<K>, T> implements IPriorityQueue<K, T> {
     }	
 
     public String print() {
-        String message = "";
-        for (int i = 0; i < heapSize; i++) {
-            message += list.get(i).getValue() + " ";
+        if (list.isEmpty()) {
+            return "Empty";
+        } else {
+            String message = "";
+            for (int i = 0; i < list.size(); i++) {
+                message += list.get(i).getValue().toString();
+            }
+            return message;
         }
-        return message;
+            
     }
 }

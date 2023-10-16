@@ -67,7 +67,7 @@ public class Task {
     }
 
     public String toString() {
-        return id;
+        return "Nombre " + label + "\n" + "Id " + id + "\n";
     }
 
 }
