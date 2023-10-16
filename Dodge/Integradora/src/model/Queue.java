@@ -20,8 +20,9 @@ public class Queue<T> {
             size++;
 
         } else {
-            last.setNext(nuevoNodo);
-            last = nuevoNodo;
+
+            Nodo<T> newNode = nuevoNodo;
+            last.setSiguiente(newNode);
             size++;
         }
         setSize(size);
@@ -91,13 +92,12 @@ public class Queue<T> {
     }
 
     public String print() {
-        StringBuilder result = new StringBuilder();
+        String msg = " ";
         Nodo<T> current = first;
-        do {
-            result.append(current.getValue()).append("\n");
+        while (current != null) {
+            msg += current.getValue() + "\n";
             current = current.getSiguiente();
-        } while (current != null);
-
-        return result.toString();
+        }
+        return msg;
     }
 }
