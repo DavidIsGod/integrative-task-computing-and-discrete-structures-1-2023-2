@@ -38,7 +38,5 @@ public class ControllerTest {
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, month - 1, day);
         return calendar;
-    }   
+    }
 }
-
-   

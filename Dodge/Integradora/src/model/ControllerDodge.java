@@ -26,8 +26,8 @@ public class ControllerDodge {
         return calendar;
     }
 
-    public boolean addTask(String id, String title, String summary, Calendar deadline, int priority) {
-        Task task = new Task(summary, id, deadline, priority, title);
+    public boolean addTask(String id, String label, String overwiev, Calendar deadline, int priority) {
+        Task task = new Task(id, label, overwiev, deadline, priority);
 
         if (task.getPriority() == 0) {
             taskQueue.enqueue(task);
@@ -124,7 +124,7 @@ public class ControllerDodge {
         if (taskQueue.isEmpty()) {
             msg += "La cola de tareas está vacía.";
         } else {
-            msg += "Contenido de taskQueue: " + taskQueue.print();
+            msg += "Contenido de taskQueue: \n" + taskQueue.print();
         }
         return msg;
     }

@@ -31,8 +31,7 @@ public class Dodge {
                     "4.\tView the list of tasks and reminders.\r\n" +
                     "5.\tFilter tasks by priority.\r\n" +
                     "6.\tUndo the last action.\r\n" +
-                    "7.\tNotification settings.\r\n" +
-                    "8.\tExit the system.");
+                    "7.\tExit the system.");
 
             int value = sc.nextInt();
 

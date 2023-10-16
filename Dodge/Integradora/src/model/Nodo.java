@@ -37,6 +37,7 @@ public class Nodo<T> {
     }
 
     public T getValue() {
+
         return valor;
     }
 
