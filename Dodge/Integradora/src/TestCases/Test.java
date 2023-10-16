@@ -1,43 +1,46 @@
-import model.ControllerDodge;
-import model.Action;
-import model.HashNode;
-import model.IHashTable;
-import model.IPriorityQueue;    
-import model.IStack;
-import model.NodeHeap;
-import model.Nodo;
-import model.Queue;
-import model.Stack;
-import model.Task;
-import model.TaskHashTable;
-import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 public class Test {
 
-    static ControllerDodge controller;
+    package TestCases;
 
-    static ArrayList<Task> tasks;
+    import static org.junit.jupiter.api.Assertions.assertEquals;
+    import static org.junit.jupiter.api.Assertions.assertNotNull;
+    import static org.junit.jupiter.api.Assertions.assertTrue;
 
+    import java.util.ArrayList;
+    import java.util.Calendar;
+    import java.util.Date;
+    import model.ControllerDodge;
+    import model.Task;
 
-    @Test
-    public void testAddTask() {
-        // Crear una nueva instancia de ControllerDodge
-        controller = new ControllerDodge();
+    public class Test {
 
-        // Agregar una tarea
-        assertTrue(controller.addTask("001", "Tarea 1", "Resumen 1", setDeadline(2023, 7, 27), 1));
+        static ControllerDodge controller;
 
-        // Recuperar la tarea agregada y verificar su existencia
-        Task addedTask = controllerDodge.search("001");
+        static ArrayList<Task> tasks;
+
+        @Test
+        public void testAddTask() {
+            // Crear una nueva instancia de ControllerDodge
+            controller = new ControllerDodge();
+            Calendar deadline = Calendar.getInstance();
+            deadline.set(2023, 6, 27);
+            // Agregar una tarea
+            assertTrue(controller.addTask("001", "Tarea 1", "Resumen 1", deadline, 1));
+
+            // Recuperar la tarea agregada y verificar su existencia
+        Task addedTask = controller.search("001");
         assertNotNull(addedTask);
         assertEquals("Tarea 1", addedTask.getLabel());
         assertEquals("Resumen 1", addedTask.getOverview());
-        assertEquals(createDate(2023, 7, 27), addedTask.getDeadline());
+        assertEquals(deadline, addedTask.getDeadline());
         assertEquals(1, addedTask.getPriority());
+        }
+
+        private Calendar createDate(int year, int month, int day) {
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(year, month - 1, day);
+            return calendar;
+        }
     }
 
    
