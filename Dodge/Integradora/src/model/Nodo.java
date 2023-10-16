@@ -2,7 +2,7 @@ package model;
 
 public class Nodo<T> {
     T valor;
-    Nodo<T> siguiente;
+    private Nodo<T> siguiente;
 
     public Nodo(T valor) {
         this.valor = valor;
@@ -12,8 +12,25 @@ public class Nodo<T> {
     private Nodo<T> next;
     private Nodo<T> previous;
 
+    public T getValor() {
+        return valor;
+    }
 
+    public void setValor(T valor) {
+        this.valor = valor;
+    }
 
+    public Nodo<T> getSiguiente() {
+        return siguiente;
+    }
+
+    public void setSiguiente(Nodo<T> siguiente) {
+        this.siguiente = siguiente;
+    }
+
+    public Nodo<T> getPrevious() {
+        return previous;
+    }
 
     public Nodo<T> getprevious() {
         return previous;
@@ -23,11 +40,11 @@ public class Nodo<T> {
         return valor;
     }
 
-    public void setValue (T valor) {
+    public void setValue(T valor) {
         this.valor = valor;
     }
 
-    public Nodo <T> getNext() {
+    public Nodo<T> getNext() {
         return next.getNext();
     }
 
@@ -38,8 +55,5 @@ public class Nodo<T> {
     public void setPrevious(Nodo<T> previous) {
         this.previous = previous;
     }
-
-
-
 
 }

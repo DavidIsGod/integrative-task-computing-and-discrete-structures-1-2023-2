@@ -93,10 +93,11 @@ public class Queue<T> {
     public String print() {
         StringBuilder result = new StringBuilder();
         Nodo<T> current = first;
-        while (current != null) {
+        do {
             result.append(current.getValue()).append("\n");
-            current = current.getNext();
-        }
+            current = current.getSiguiente();
+        } while (current != null);
+
         return result.toString();
     }
 }
