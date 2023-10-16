@@ -6,6 +6,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import Exceptions.ListNullException;
+
 public class ControllerDodge {
 
     private Queue<Task> taskQueue;
@@ -41,20 +43,28 @@ public class ControllerDodge {
     }
 
     public Task search(String Id) {
+        
         return taskHashTable.search(Id);
     }
 
-    public boolean deleteTask(String Id) {
-        Task task = (Task) taskHashTable.search(Id);
-        taskHashTable.delete(task.getId());
-        if (task.getPriority() == 0) {
-            taskQueue.delete(task);
+    -public boolean deleteTask(String Id) {
+    try {
+        Task task = taskHashTable.search(Id);
+
+        if (task != null) {
+            taskHashTable.delete(task.getId());
+            userAction(1, task);
+            return true;
         } else {
-            taskPriorityQueue.delete(task);
+           
+            throw new ListNullException("La tarea con ID " + Id + " no existe.");
         }
-        userAction(1, task);
-        return true;
+    } catch (ListNullException e) {
+        
+        System.out.println(e.getMessage());
+        return false;
     }
+}
 
     public String modify(String modify, String Id, int modifyAction, Calendar date) {
         Task taskToModify = taskHashTable.search(Id);
