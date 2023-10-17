@@ -99,7 +99,7 @@ public class ControllerDodge {
                 break;
         }
         userAction(2, copy);
-        return "Se modifico correctamente";
+        return "Correctly modified";
     }
 
     public void userAction(int action, Task agenda) {
@@ -131,9 +131,9 @@ public class ControllerDodge {
     public String showAllTaskPriority() {
         String msg = "";
         if (((Heap<Integer, Task>)taskPriorityQueue).getSize() == 0) {
-            msg += "La cola de tareas por prioridad está vacía.";
+            msg += "The task queue by priority is empty.";
         } else {
-            msg += "Contenido de cola de tareas por prioridad:\n" + ((Heap<Integer, Task>)taskPriorityQueue).print() + "\n";
+            msg += "Task queue content by priority:\n" + ((Heap<Integer, Task>)taskPriorityQueue).print() + "\n";
         }
         return msg;
     }
@@ -141,15 +141,15 @@ public class ControllerDodge {
     public String showAllTask() {
         String msg = "";
         if (taskQueue.isEmpty()) {
-            msg += "La cola de tareas no prioritarias está vacía. \n";
+            msg += "The task queue by priority is empty. \n";
         } else {
-            msg += "Contenido de taskQueue:\n" + taskQueue.print() + "\n";
+            msg += "TaskQueue content:\n" + taskQueue.print() + "\n";
         }
 
         if (((Heap<Integer, Task>)taskPriorityQueue).getSize() == 0) {
-            msg += "La cola de tareas por prioridad está vacía.";
+            msg += "The task queue by priority is empty.";
         } else {
-            msg += "Contenido de cola de tareas por prioridad:\n" + ((Heap<Integer, Task>)taskPriorityQueue).print();
+            msg += "Task queue content by priority:\n" + ((Heap<Integer, Task>)taskPriorityQueue).print();
         }
         return msg;
     }

@@ -17,18 +17,18 @@ public class ControllerTest {
 
     @Test
     public void testAddTask() {
-        // Crear una nueva instancia de ControllerDodge
+        // Create a new instance of ControllerDodge
         controller = new ControllerDodge();
         Calendar deadline = Calendar.getInstance();
         deadline.set(2023, 6, 27);
-        // Agregar una tarea
-        assertTrue(controller.addTask("001", "Tarea 1", "Resumen 1", deadline, 1));
+        // Add a task
+        assertTrue(controller.addTask("001", "Task 1", "Overview 1", deadline, 1));
 
-        // Recuperar la tarea agregada y verificar su existencia
+        // Retrieve the added task and verify its existence
         Task addedTask = controller.search("001");
         assertNotNull(addedTask);
-        assertEquals("Tarea 1", addedTask.getLabel());
-        assertEquals("Resumen 1", addedTask.getOverview());
+        assertEquals("Task 1", addedTask.getLabel());
+        assertEquals("Overview 1", addedTask.getOverview());
         assertEquals(deadline, addedTask.getDeadline());
         assertEquals(1, addedTask.getPriority());
     }
@@ -39,7 +39,7 @@ public class ControllerTest {
         Calendar deadline = Calendar.getInstance();
         deadline.set(2023, 6, 27);
       
-        controller.addTask("001", "Tarea 1", "Resumen 1", deadline, 0);
+        controller.addTask("001", "Task 1", "Overview 1", deadline, 0);
        
         Task addedTask = controller.search("001");
         assertNotNull(addedTask);
@@ -50,42 +50,42 @@ public class ControllerTest {
     @Test
     public void testModifyTitle() {
         
-        controller.addTask("001", "Tarea 1", "Resumen 1", setDeadline(2023, 7, 27), 1);
+        controller.addTask("001", "Task 1", "Overview 1", setDeadline(2023, 7, 27), 1);
 
        
-        String result = controller.modify("Nuevo Título", "001", 1);
+        String result = controller.modify("New label", "001", 1);
 
         
         Task modifiedTask = controller.search("001");
 
        
-        assertEquals("Se modifico correctamente", result);
+        assertEquals("Correctly modified", result);
 
         
-        assertEquals("Nuevo Título", modifiedTask.getLabel());
+        assertEquals("New label", modifiedTask.getLabel());
     }
 
     @Test
     public void testModifyDescription() {
-        // Agregar una tarea para modificar
-        controller.addTask("002", "Tarea 2", "Resumen 2", setDeadline(2023, 7, 27), 1);
+        // Add a task to modify
+        controller.addTask("002", "Task 2", "Overview 2", setDeadline(2023, 7, 27), 1);
 
-        // Modificar la descripción de la tarea
-        String result = controller.modify("Nueva Descripción", "002", 2);
+        // Modify the task description
+        String result = controller.modify("New description", "002", 2);
 
-        // Obtener la tarea modificada
+        // Get the modified task
         Task modifiedTask = controller.search("002");
 
-        // Verificar que el resultado del método sea el esperado
-        assertEquals("Se modifico correctamente", result);
+        // Verify that the result of the method is the expected one.
+        assertEquals("Correctly modified", result);
 
-        // Verificar que la descripción de la tarea se haya modificado correctamente
-        assertEquals("Nueva Descripción", modifiedTask.getOverview());
+        // Verify that the task description has been modified correctly
+        assertEquals("New description", modifiedTask.getOverview());
     }
 
     private Calendar setDeadline(int year, int month, int day) {
         Calendar deadline = Calendar.getInstance();
-        deadline.set(year, month - 1, day);  // Mes es 0-indexado
+        deadline.set(year, month - 1, day);  // Month is 0-indexed
         return deadline;
     }
 }

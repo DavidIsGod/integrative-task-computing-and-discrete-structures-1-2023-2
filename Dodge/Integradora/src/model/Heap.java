@@ -162,7 +162,7 @@ public class Heap<K extends Comparable<K>, T> implements IPriorityQueue<K, T> {
     public T get(int index) {
         if (index < 0 || index >= heapSize) {
            
-            throw new IndexOutOfBoundsException("Índice fuera de límites");
+            throw new IndexOutOfBoundsException("Index Out Of Bounds");
         }
 
         return list.get(index).getValue();

@@ -87,7 +87,7 @@ public class Dodge {
             if (dodge.addTask(id, label, overview, deadline, priority)) {
                 System.out.println("Task added successfully");
             } else {
-                System.out.println("No se pudo agregar la tarea");
+                System.out.println("The task could not be added");
             }
         } else if (priorityKU > 0) {
             System.out.println("Choose the priority in a range of [1, 10]");
@@ -96,19 +96,19 @@ public class Dodge {
             if (dodge.addTask(id, label, overview, deadline, priority)) {
                 System.out.println("Task added successfully");
             } else {
-                System.out.println("No se pudo agregar la tarea");
+                System.out.println("The task could not be added");
             }
         }
 
     }
 
     private void modifyTask() {
-        System.out.println("Para modificar una Tarea debes proporcionar la siguiente información:");
+        System.out.println("To modify a Task you must provide the following information:");
         System.out.println("Enter the ID:");
         String id = sc.nextLine();
-        System.out.println("¿Qué deseas modificar? \n1.Label \n2.Overview \n3.Date \n4.Priority" );
+        System.out.println("What do you want to modify? \n1.Label \n2.Overview \n3.Date \n4.Priority" );
         int val = Integer.parseInt(sc.nextLine());
-        System.out.println("Escribe la modificaciona realizar: ");
+        System.out.println("Write the modification you wish to perform: ");
         String modify = "";
         switch (val) {
             case 1: // "title"
@@ -124,15 +124,15 @@ public class Dodge {
                 modify = sc.nextLine();
                 break;
             default:
-                System.out.println("Accion no válida");
+                System.out.println("Invalid action");
                 break;
         }
         dodge.modify(modify, id, val);
-        System.out.println("Se modificó correctamente.");
+        System.out.println("It was correctly modified.");
 
     }
     private void deleteTask() {
-        System.out.println("Para eliminar una Tarea debes proporcionar la siguiente información:");
+        System.out.println("To delete a Task you must provide the following information:");
         System.out.println("Enter the ID:");
         String id = sc.nextLine();
         sc.nextLine();

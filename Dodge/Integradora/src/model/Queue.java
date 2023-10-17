@@ -78,7 +78,7 @@ public class Queue<T> {
 
     public T get(int index) {
         if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException("Índice fuera de límites");
+            throw new IndexOutOfBoundsException("Index Out Of Bounds");
         }
 
         Nodo<T> current = first;
@@ -91,7 +91,7 @@ public class Queue<T> {
 
     public String print() {
         if (first == null) {
-            return "La cola está vacía";
+            return "Queue is empty";
         }
         return print(first);
 
