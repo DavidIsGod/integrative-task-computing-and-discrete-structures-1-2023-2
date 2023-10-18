@@ -1,5 +1,4 @@
 
-
 import org.junit.*;
 
 import static org.junit.Assert.*;
@@ -14,6 +13,11 @@ public class ControllerTest {
     static ControllerDodge controller;
 
     static ArrayList<Task> tasks;
+
+    @Before
+    public void setUp() {
+        controller = new ControllerDodge(); // Inicializa el controlador antes de cada prueba
+    }
 
     @Test
     public void testAddTask() {
@@ -38,9 +42,9 @@ public class ControllerTest {
         ControllerDodge controller = new ControllerDodge();
         Calendar deadline = Calendar.getInstance();
         deadline.set(2023, 6, 27);
-      
+
         controller.addTask("001", "Task 1", "Overview 1", deadline, 0);
-       
+
         Task addedTask = controller.search("001");
         assertNotNull(addedTask);
         assertTrue(controller.deleteTask("001"));
@@ -49,19 +53,19 @@ public class ControllerTest {
 
     @Test
     public void testModifyTitle() {
-        
-        controller.addTask("001", "Task 1", "Overview 1", setDeadline(2023, 7, 27), 1);
 
-       
+        Calendar deadline = Calendar.getInstance();
+
+        deadline.set(2023, 6, 27);
+
+        controller.addTask("001", "Task", "Overview", deadline, 0);
+
         String result = controller.modify("New label", "001", 1);
 
-        
         Task modifiedTask = controller.search("001");
 
-       
         assertEquals("Correctly modified", result);
 
-        
         assertEquals("New label", modifiedTask.getLabel());
     }
 
@@ -85,7 +89,7 @@ public class ControllerTest {
 
     private Calendar setDeadline(int year, int month, int day) {
         Calendar deadline = Calendar.getInstance();
-        deadline.set(year, month - 1, day);  // Month is 0-indexed
+        deadline.set(year, month - 1, day); // Month is 0-indexed
         return deadline;
     }
 }

@@ -28,46 +28,45 @@ public class ControllerDodge {
         return calendar;
     }
 
-  public boolean addTask(String id, String label, String overview, Calendar deadline, int priority) {
-    if (id == null || label == null || overview == null || deadline == null) {
-        return false;
+    public boolean addTask(String id, String label, String overview, Calendar deadline, int priority) {
+        if (id == null || label == null || overview == null || deadline == null) {
+            return false;
+        }
+        Task task = new Task(id, label, overview, deadline, priority);
+        if (task == null) {
+            return false;
+        }
+        if (task.getPriority() == 0) {
+            taskQueue.enqueue(task);
+            taskHashTable.add(id, task);
+        } else {
+            taskPriorityQueue.add(Integer.valueOf(task.getPriority()), task);
+            taskHashTable.add(task.getId(), task);
+        }
+        userAction(0, task);
+        return true;
     }
-    Task task = new Task(id, label, overview, deadline, priority);
-    if (task == null) {
-        return false;
-    }
-    if (task.getPriority() == 0) {
-        taskQueue.enqueue(task);
-        taskHashTable.add(id, task);
-    } else {
-        taskPriorityQueue.add(Integer.valueOf(task.getPriority()), task);
-        taskHashTable.add(task.getId(), task);
-    }
-    userAction(0, task);
-    return true;
-}
-
 
     public Task search(String Id) {
-        
+
         return taskHashTable.search(Id);
     }
 
     public boolean deleteTask(String Id) {
-    boolean result = false;
-    Task task = taskHashTable.search(Id);
-    if (task != null) {
-        taskHashTable.delete(Id);
-        if(task.getPriority() == 0){
-            taskQueue.delete(task);
-        }else{
-            taskPriorityQueue.delete(task);
+        boolean result = false;
+        Task task = taskHashTable.search(Id);
+        if (task != null) {
+            taskHashTable.delete(Id);
+            if (task.getPriority() == 0) {
+                taskQueue.delete(task);
+            } else {
+                taskPriorityQueue.delete(task);
+            }
+            userAction(1, task);
+            result = true;
         }
-        userAction(1, task);
-        result = true;
-    } 
-    return result;
-}
+        return result;
+    }
 
     public String modify(String modify, String Id, int modifyAction) {
         Task taskToModify = taskHashTable.search(Id);
@@ -130,10 +129,10 @@ public class ControllerDodge {
 
     public String showAllTaskPriority() {
         String msg = "";
-        if (((Heap<Integer, Task>)taskPriorityQueue).getSize() == 0) {
+        if (((Heap<Integer, Task>) taskPriorityQueue).getSize() == 0) {
             msg += "The task queue by priority is empty.";
         } else {
-            msg += "Task queue content by priority:\n" + ((Heap<Integer, Task>)taskPriorityQueue).print() + "\n";
+            msg += "Task queue content by priority:\n" + ((Heap<Integer, Task>) taskPriorityQueue).print() + "\n";
         }
         return msg;
     }
@@ -146,10 +145,10 @@ public class ControllerDodge {
             msg += "TaskQueue content:\n" + taskQueue.print() + "\n";
         }
 
-        if (((Heap<Integer, Task>)taskPriorityQueue).getSize() == 0) {
+        if (((Heap<Integer, Task>) taskPriorityQueue).getSize() == 0) {
             msg += "The task queue by priority is empty.";
         } else {
-            msg += "Task queue content by priority:\n" + ((Heap<Integer, Task>)taskPriorityQueue).print();
+            msg += "Task queue content by priority:\n" + ((Heap<Integer, Task>) taskPriorityQueue).print();
         }
         return msg;
     }

@@ -106,7 +106,7 @@ public class Dodge {
         System.out.println("To modify a Task you must provide the following information:");
         System.out.println("Enter the ID:");
         String id = sc.nextLine();
-        System.out.println("What do you want to modify? \n1.Label \n2.Overview \n3.Date \n4.Priority" );
+        System.out.println("What do you want to modify? \n1.Label \n2.Overview \n3.Date \n4.Priority");
         int val = Integer.parseInt(sc.nextLine());
         System.out.println("Write the modification you wish to perform: ");
         String modify = "";
@@ -131,6 +131,7 @@ public class Dodge {
         System.out.println("It was correctly modified.");
 
     }
+
     private void deleteTask() {
         System.out.println("To delete a Task you must provide the following information:");
         System.out.println("Enter the ID:");
